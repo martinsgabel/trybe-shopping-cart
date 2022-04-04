@@ -29,7 +29,6 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
   event.target.remove();
 }
 
@@ -68,7 +67,18 @@ const addCartButton = () => {
   });
 };
 
+const deleteWholeCart = () => {
+  const cartItemsList = document.querySelector('.cart__items');
+  cartItemsList.innerHTML = '';
+};
+
+const deleteButtonlistener = () => {
+  const button = document.querySelector('.empty-cart');
+  button.addEventListener('click', deleteWholeCart);
+};
+
 window.onload = async () => {
   await generatingElementsProducts();
   await addCartButton();
+  deleteButtonlistener();
 };
