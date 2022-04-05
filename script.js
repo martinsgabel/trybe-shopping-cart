@@ -80,9 +80,14 @@ const deleteButtonlistener = () => {
   button.addEventListener('click', deleteWholeCart);
 };
 
+const loadSavedCartItems = () => {
+  const cartList = document.querySelector('.cart__items');
+  cartList.innerHTML = getSavedCartItems();
+};
+
 window.onload = async () => {
   await generatingElementsProducts();
   await addCartButton();
   deleteButtonlistener();
-  getSavedCartItems();
+  loadSavedCartItems();
 };
