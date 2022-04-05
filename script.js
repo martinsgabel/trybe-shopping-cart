@@ -58,7 +58,7 @@ const generatingCartItem = async (idElement) => {
   const addedItem = createCartItemElement({ sku, name, salePrice });
   addedItem.addEventListener('click', cartItemClickListener);
   listCart.appendChild(addedItem);
-  saveCartItems();
+  saveCartItems(listCart.innerHTML);
 };
 
 const addCartButton = () => {
@@ -90,3 +90,5 @@ window.onload = async () => {
   deleteButtonlistener();
   loadSavedCartItems();
 };
+
+// sugar o valor da função anterior que cria o cartItem e usar o rest pro soma =)
