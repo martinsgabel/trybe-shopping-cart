@@ -84,5 +84,5 @@ window.onload = async () => {
   await generatingElementsProducts();
   await addCartButton();
   deleteButtonlistener();
-  // getSavedCartItems();
+  getSavedCartItems();
 };
