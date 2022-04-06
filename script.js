@@ -80,8 +80,14 @@ const deleteButtonlistener = () => {
   button.addEventListener('click', deleteWholeCart);
 };
 
+const addListenerToLoadedCartIts = () => {
+  const returnedList = document.querySelectorAll('.cart__item');
+  returnedList.forEach((node) => node.addEventListener('click', cartItemClickListener));
+};
+
 const loadSavedCartItems = () => {
   listCart.innerHTML = getSavedCartItems();
+  addListenerToLoadedCartIts();
 };
 
 window.onload = async () => {
@@ -90,5 +96,3 @@ window.onload = async () => {
   deleteButtonlistener();
   loadSavedCartItems();
 };
-
-// sugar o valor da função anterior que cria o cartItem e usar o rest pro soma =)
