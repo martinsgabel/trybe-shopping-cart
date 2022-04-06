@@ -81,7 +81,7 @@ const deleteButtonlistener = () => {
 };
 
 const loadSavedCartItems = () => {
-  cartList.innerHTML = getSavedCartItems();
+  listCart.innerHTML = getSavedCartItems();
 };
 
 window.onload = async () => {
