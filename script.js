@@ -36,26 +36,30 @@ function cartItemClickListener({ target }) {
   localStorage.setItem('cartItems', clean);
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ name, salePrice, img }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.innerText = `${name}
+  
+  $${salePrice}`;
+  li.appendChild(createProductImageElement(img));
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
 
 const generatingElementsProducts = async () => {
   const { results } = await fetchProducts('computador');
-    results.forEach(({ id: sku, title: name, thumbnail: image }) => {
-      const sectionProducts = createProductItemElement({ sku, name, image });
-      const items = document.querySelector('.items');
-      items.appendChild(sectionProducts);
-    });
+  
+  results.forEach(({ id: sku, title: name, thumbnail: image }) => {
+    const sectionProducts = createProductItemElement({ sku, name, image });
+    const items = document.querySelector('.items');
+    items.appendChild(sectionProducts);
+  });
 };
 
 const generatingCartItem = async (idElement) => {
-  const { id: sku, title: name, price: salePrice } = await fetchItem(idElement);
-  const addedItem = createCartItemElement({ sku, name, salePrice });
+  const { id: sku, title: name, price: salePrice, thumbnail } = await fetchItem(idElement);
+  const addedItem = createCartItemElement({ sku, name, salePrice, img: thumbnail });
   addedItem.addEventListener('click', cartItemClickListener);
   listCart.appendChild(addedItem);
   saveCartItems(listCart.innerHTML);
