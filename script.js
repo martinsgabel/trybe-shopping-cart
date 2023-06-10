@@ -30,8 +30,8 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
-function cartItemClickListener(event) {
-  event.target.remove();
+function cartItemClickListener({ target }) {
+  target.remove();
   const clean = '';
   localStorage.setItem('cartItems', clean);
 }
