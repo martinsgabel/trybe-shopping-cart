@@ -1,5 +1,22 @@
 const listCart = document.querySelector('.cart__items');
 
+function getPrices() {
+  const salePriceList = document.querySelectorAll('.product__price');
+  priceArray = [];
+  salePriceList.forEach((element) => {
+    const price = element.innerText.split('$');
+    priceArray.push(Number(price[1]));
+  });
+  return priceArray;
+}
+
+function priceSum() {
+  const priceDiv = document.querySelector('.price__sum');
+  const values = getPrices();
+  const total = values.reduce((acc, curr) => acc + Number(curr), 0);
+  priceDiv.innerText = `Total: $ ${total}`;
+}
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -39,9 +56,8 @@ function cartItemClickListener({ target }) {
 function createCartItemElement({ name, salePrice, img }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `${name}
-  
-  $${salePrice}`;
+  li.innerHTML = `<span class="product__name">${name}</span>
+  <span class="product__price">$${salePrice}</span>`;
   li.appendChild(createProductImageElement(img));
   li.addEventListener('click', cartItemClickListener);
   return li;
@@ -63,6 +79,7 @@ const generatingCartItem = async (idElement) => {
   addedItem.addEventListener('click', cartItemClickListener);
   listCart.appendChild(addedItem);
   saveCartItems(listCart.innerHTML);
+  priceSum();
 };
 
 const addCartButton = () => {
@@ -77,6 +94,7 @@ const addCartButton = () => {
 
 const deleteWholeCart = () => {
   listCart.innerHTML = '';
+  priceSum();
 };
 
 const deleteButtonlistener = () => {
@@ -99,4 +117,5 @@ window.onload = async () => {
   await addCartButton();
   deleteButtonlistener();
   loadSavedCartItems();
+  priceSum();
 };
